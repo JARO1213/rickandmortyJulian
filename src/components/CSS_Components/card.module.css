@@ -141,5 +141,23 @@
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
     border-radius: 5px;
   }
-  
-  
+    
+  .subtittleDetail {
+    font-size: 1em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 1px;
+    text-align: center;
+    margin-bottom: 0.090em;
+    color: #3b022a;
+    text-shadow:8px;
+    text-decoration-style: wavy;
+    text-shadow: #000102;
+    letter-spacing: 0.08em;
+  }
+  .borderdetail {
+    border: #060007;
+    border-width: 18%;
+    border-color: #03A9F4;
+    border-style: groove;
+    border-radius: 19%;
+  }

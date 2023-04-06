@@ -5,6 +5,9 @@ import Nav from "./components/Nav.jsx";
 import React, { useState } from "react";
 import styles from "./components/CSS_Components/card.module.css";
 import axios from 'axios';
+import {Routes, Route } from 'react-router-dom'
+import About from "./components/About";
+import Detail from "./components/Detail";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -32,17 +35,20 @@ setCharacters((oldChars) => {
 
   return (
     <div className="App">
+      
       <span className={`${styles.span}`}>
         <h1 className={`${styles.Tittleh1}`}>Rick & Morty</h1>
         <h2>by: Julián R.</h2>
       </span>
-
+     
       <div>
         <Nav onSearch={onSearch}/>
-        <div>
-        <Cards onClose ={onClose} characters={characters} />
-        </div>
-      </div>
+        <Routes>
+         <Route path="/home" element={<Cards onClose ={onClose} characters={characters}/>}></Route>
+         <Route path="/About" element={<About/>}></Route>
+         <Route path="/detail/:id" element={<Detail/>}></Route>
+        </Routes>
+      </div>  
     </div>
   );
 }
