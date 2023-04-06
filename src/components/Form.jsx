@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 const regemail = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/i;
 const regepassword = /^[a-zA-Z]\w{3,14}$/;
 
-export default function Forms() {
-  const [inputs, setInputs] = useState({
+export default function Forms({login}) {
+  const [inputs, setInputs] = useState({ //estado local con las propiedades 
     //setea los estados en e-mail y password
     email:"",
     password:"",
@@ -17,8 +17,7 @@ export default function Forms() {
     email:"",
     password:"",
   });
-  function validate(inputs) {
-    //esta función valida  los errores en e-mail y password
+  function validate(inputs) {   //estado local, esta función valida  los errores en e-mail y password
     const errors = {};
     if (!inputs.email) {
       errors.email = "Must be completed with an e-mail";
@@ -33,7 +32,7 @@ export default function Forms() {
     return errors
   }
 
-  function handleChange(e) {
+  function handleChange(e) { // refleja el texto ingresado en los inputs
     setInputs({ ...inputs, [e.target.name]: e.target.value }); //para efectuar los cambios en el input
     setErrors(validate({ ...inputs, [e.target.name]: e.target.value })); // para validar el contenido de los inputs(bindear)
   }
@@ -49,7 +48,12 @@ export default function Forms() {
         email: "",
         password: "",
       });
-      return alert("Everthing was good");
+     if(inputs){
+      login(inputs);
+      return ("welcome")
+     }else{
+      return alert("Not signed");
+     }
     }
     return alert("Error");
   }
@@ -72,11 +76,9 @@ export default function Forms() {
           placeholder=""
         ></input>
         <p className="danger">{errors.password}</p>
-        {Object.keys(errors).length === 0 ? (
-          <Link to="/home">
+        
             <button type="submit">Submit</button>
-          </Link>
-        ) : null}
+       
       </form>
     </div>
   );
