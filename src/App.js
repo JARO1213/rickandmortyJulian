@@ -2,10 +2,10 @@ import "./App.css";
 import { useLocation } from "react-router-dom";
 import Cards from "./components/Cards.jsx";
 import Nav from "./components/Nav.jsx";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./components/CSS_Components/card.module.css";
 import axios from "axios";
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route, useNavigate} from "react-router-dom";
 import About from "./components/About";
 import Detail from "./components/Detail";
 import Forms from "./components/Form";
@@ -13,8 +13,23 @@ import Forms from "./components/Form";
 function App() {
   const [characters, setCharacters] = useState([]);
  
+  const navigate = useNavigate();
+  const [access, setAccess] = useState(false);
+  const EMAIL = 'ejemplo@gmail.com';
+  const PASSWORD = 'unaPassword';
   var location = useLocation();
   console.log("este es ---->", location)
+   
+  function login(inputs) { // Crea una función llamada "login" que reciba por parámetro "userData". Esta función tiene que preguntar si el email y password que declaraste más arriba son iguales a los que les está llegando por parámetro. En caso afirmativo, el estado local access ahora será true. Importa el hook "useNavigate" de react-router-dom y haremos que nos redirija a /home si la información es correcta.
+     if (inputs.password === PASSWORD && inputs.email === EMAIL) {
+        setAccess(true);
+        navigate('/home');
+       }
+  }
+    
+  useEffect(() => {
+     !access && navigate('/');
+  }, [access]);
 
   function onClose(id) {
     setCharacters((oldChars) => {
@@ -51,7 +66,7 @@ function App() {
       <div>
         {location.pathname === "/"? null :  <Nav onSearch={onSearch} />}
         <Routes>
-          <Route path="/" element={<Forms />}></Route>
+          <Route path="/" element={<Forms login={login}/>}></Route>
           <Route
             path="/home"
             element={<Cards onClose={onClose} characters={characters} />}

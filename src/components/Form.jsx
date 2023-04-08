@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const regemail = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/i;
 const regepassword = /^[a-zA-Z]\w{3,14}$/;
