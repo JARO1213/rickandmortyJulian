@@ -17,7 +17,7 @@ function Card(props){
   onClose,
   addFav,
   removeFav,
-  myFavorites,
+  myFavorite,
 }= props;
   // const dispatch = useDispatch();
   // dispatch(addFav({}));  //esto en lugar del connect de abajo, el add fav se agrega a las propiedades, teambién con connect se agregan las propiedades
@@ -34,16 +34,16 @@ function Card(props){
     }
   }
   useEffect(() => {
-   myFavorites.forEach((fav) => {      
-      if (fav.id === props.id) {
+   myFavorite.forEach((fav) => {      
+      if (fav.id === id) {
          setIsFav(true);
       }
    });
-}, [myFavorites]);// revisa cuales están en favoritos y cuales no. // MINUTO 37:57
+}, [myFavorite, id]);// revisa cuales están en favoritos y cuales no. // MINUTO 37:57
 
   return (
     <div>
-      {isFav ? (
+      { isFav ? (
         <button onClick={handleFavorite}>❤️</button>
       ) : (
         <button onClick={handleFavorite}>🤍</button>
@@ -61,16 +61,18 @@ function Card(props){
     </div>
   );
 }
+
+//esta lógica del dispatch está fuera del compoenente
 function maStateToProp(state) { //estado (el null, ahora es este estado de abajo)
    return {
-    myFavorites: state.myFavorites,
+    myFavorite: state.myFavorite,
    };
  }
 function mapDispatchToProp(dispatch) {
   // se hace tambipn para la función eestado estado (el null de abajo)
   return {
-    addFav: (ch) => dispatch(addFav(ch)), // ya no es una función común sino de tipo dispatch
-    removeFav: (id) => dispatch(removeFav(id)), // ya no es una función común sino de tipo dispatch
+    addFav: (ch) => dispatch(addFav(ch)), // ya no es una función común sino de tipo dispatch, despacha la acción add
+    removeFav: (id) => dispatch(removeFav(id)), // ya no es una función común sino de tipo dispatch, despacha la acción remove
   };
 }
 export default connect(maStateToProp, mapDispatchToProp)(Card); // primero la función que se conecta al estado, y después las funciones que conectan con el dispatch, ejecutamos tipo actions. Luego el parentesis con nombre a este componente pasándole propiedades dispathc o state

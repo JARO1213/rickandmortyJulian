@@ -10,6 +10,8 @@ function Nav ({onSearch}) {
        <Link to ="/About">About</Link>
        <br></br>         
        <Link to ="/Home">Home</Link>
+       <br></br>         
+       <Link to ="/Favorite">Favorite</Link>
        <SearchBar onSearch={onSearch}/>               
      </div> 
     )    

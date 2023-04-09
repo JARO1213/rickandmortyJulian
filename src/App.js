@@ -9,7 +9,9 @@ import { Routes, Route, useNavigate} from "react-router-dom";
 import About from "./components/About";
 import Detail from "./components/Detail";
 import Forms from "./components/Form";
+import Favorite from "./components/Favorite";
 
+ 
 function App() {
   const [characters, setCharacters] = useState([]);
  
@@ -72,8 +74,10 @@ function App() {
             element={<Cards onClose={onClose} characters={characters} />}
           ></Route>
           <Route path="/About" element={<About />}></Route>
+          <Route path="/Favorite" element={<Favorite onClose={onClose} />}></Route>
           <Route path="/detail/:id" element={<Detail />}></Route>
         </Routes>
+       
       </div>
     </div>
   );
